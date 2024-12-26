@@ -1,4 +1,3 @@
-import { v4 as uuid } from "uuid";
 import { db } from "../../db";
 
 const userController = {
@@ -14,7 +13,7 @@ const userController = {
   create(req, res) {
     const newUser = {
       username: req.body.username,
-      password: "safepassword",
+      password: req.body.password,
       name: req.body.name,
       email: req.body.email,
     };

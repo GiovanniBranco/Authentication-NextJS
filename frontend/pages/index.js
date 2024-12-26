@@ -20,7 +20,7 @@ export default function HomeScreen() {
         router.push("/auth/auth-page-ssr");
         // router.push("/auth/auth-page-static");
       })
-      .catch((error) => alert("username or password is incorrect"));
+      .catch((error) => alert("Username or Password is incorrect"));
   };
 
   const router = useRouter();
