@@ -21,8 +21,8 @@ export default function HomeScreen() {
         if (response.data.access_token) {
           TokenService.save(response.data.access_token);
         }
-        router.push("/auth/auth-page-ssr");
-        // router.push("/auth/auth-page-static");
+        // router.push("/auth/auth-page-ssr");
+        router.push("/auth/auth-page-static");
       })
       .catch((error) => alert("Username or Password is incorrect"));
   };

@@ -15,7 +15,7 @@ export const AuthService = {
     return await HttpClient("session", {
       method: "GET",
       headers: {
-        "x-authorization": `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
       },
     }).then((response) => {
       return response.data;
