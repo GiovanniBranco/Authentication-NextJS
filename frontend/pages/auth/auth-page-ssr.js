@@ -1,18 +1,18 @@
-import { TokenService } from "../../src/services/auth/tokenService";
+import { withSession } from "../../src/services/auth/session";
 
-export const getServerSideProps = async (context) => {
-  const token = TokenService.get(context);
+export const getServerSideProps = withSession((context) => {
   return {
     props: {
-      token,
+      session: context.req.session,
     },
   };
-};
+});
 
 const AuthPageSSR = (props) => {
   return (
     <div>
       <h1>Auth Page Server Side Render</h1>
+      <pre>{JSON.stringify(props, null, 2)}</pre>
     </div>
   );
 };

@@ -5,14 +5,16 @@ export const HttpClient = async (url, options) => {
     ...options,
     headers: {
       "Content-Type": "application/json",
+      ...options.headers,
     },
+    body: options.body ? JSON.stringify(options.body) : null,
   }).then(async (response) => {
-    if (!response.status === 401) throw new Error("Unauthorized");
+    if (response.status === 401) throw new Error("Unauthorized");
 
     if (!response.ok) throw new Error("Internal server error");
 
     const body = await response.json();
-    
+
     return body;
   });
 };

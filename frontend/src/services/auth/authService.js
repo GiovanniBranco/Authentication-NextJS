@@ -1,10 +1,24 @@
 import { HttpClient } from "../../infra/httpClient/httpClient";
+import { TokenService } from "./tokenService";
 
 export const AuthService = {
   async login(values) {
     return await HttpClient("login", {
       method: "POST",
-      body: JSON.stringify(values),
+      body: values,
+    });
+  },
+
+  async getSession(context = null) {
+    const token = TokenService.get(context);
+
+    return await HttpClient("session", {
+      method: "GET",
+      headers: {
+        "x-authorization": `Bearer ${token}`,
+      },
+    }).then((response) => {
+      return response.data;
     });
   },
 };

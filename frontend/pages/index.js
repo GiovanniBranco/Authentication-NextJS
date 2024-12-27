@@ -18,8 +18,6 @@ export default function HomeScreen() {
 
     AuthService.login(values)
       .then((response) => {
-        console.log(response.data);
-
         if (response.data.access_token) {
           TokenService.save(response.data.access_token);
         }
