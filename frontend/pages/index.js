@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
 import { AuthService } from "../src/services/auth/authService";
+import { TokenService } from "../src/services/auth/tokenService";
 
 export default function HomeScreen() {
   const [values, setValues] = useState({
@@ -16,7 +17,12 @@ export default function HomeScreen() {
     event.preventDefault();
 
     AuthService.login(values)
-      .then(() => {
+      .then((response) => {
+        console.log(response.data);
+
+        if (response.data.access_token) {
+          TokenService.save(response.data.access_token);
+        }
         router.push("/auth/auth-page-ssr");
         // router.push("/auth/auth-page-static");
       })

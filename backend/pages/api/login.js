@@ -18,8 +18,6 @@ const controllers = {
       const access_token = await authService.generateAccessToken(user._id);
       const refresh_token = await authService.generateRefreshToken(user._id);
 
-      console.log(user._id);
-
       db.users.update(
         { _id: user._id },
         { $set: { refresh_token: refresh_token } },

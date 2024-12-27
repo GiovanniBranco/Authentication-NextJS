@@ -1,3 +1,14 @@
+import { TokenService } from "../../src/services/auth/tokenService";
+
+export const getServerSideProps = async (context) => {
+  const token = TokenService.get(context);
+  return {
+    props: {
+      token,
+    },
+  };
+};
+
 const AuthPageSSR = (props) => {
   return (
     <div>
