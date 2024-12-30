@@ -15,6 +15,7 @@ export const TokenService = {
     nookies.set(context, REFRESH_TOKEN_KEY, refreshToken, {
       httpOnly: true,
       sameSite: "lax",
+      path: "/",
     });
   },
 

@@ -35,12 +35,17 @@ export const AuthService = {
   async getSession(context = null) {
     const token = TokenService.get(context);
 
-    return await HttpClient("session", {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${token}`,
+    return await HttpClient(
+      "session",
+      {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       },
-    }).then((response) => {
+      true,
+      true
+    ).then((response) => {
       return response.data;
     });
   },

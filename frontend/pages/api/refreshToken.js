@@ -19,19 +19,25 @@ const controllers = {
     const context = { req, res };
     const refresh_token = TokenService.getRefreshToken(context);
 
-    const response = await HttpClient("refresh", {
-      method: "POST",
-      body: { refresh_token },
-    });
+    try {
+      const response = await HttpClient("refresh", {
+        method: "POST",
+        body: { refresh_token },
+      });
 
-    TokenService.save(response.data.access_token, context);
-    TokenService.saveRefreshToken(response.data.refresh_token, context);
+      TokenService.save(response.data.access_token, context);
+      TokenService.saveRefreshToken(response.data.refresh_token, context);
 
-    res.json({
-      data: {
-        message: "Access token refreshed",
-      },
-    });
+      res.status(200).json({
+        data: {
+          message: "Access token refreshed",
+          access_token: response.data.access_token,
+          refresh_token: response.data.refresh_token,
+        },
+      });
+    } catch (error) {
+      res.status(401).json({ message: "Unauthorized" });
+    }
   },
 };
 
