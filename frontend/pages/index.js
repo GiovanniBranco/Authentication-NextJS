@@ -17,8 +17,8 @@ export default function HomeScreen() {
 
     await AuthService.login(values);
 
-    // router.push(`/auth/auth-page-ssr`);
-    router.push(`/auth/auth-page-static`);
+    router.push(`/auth/auth-page-ssr`);
+    // router.push(`/auth/auth-page-static`);
   };
 
   const router = useRouter();

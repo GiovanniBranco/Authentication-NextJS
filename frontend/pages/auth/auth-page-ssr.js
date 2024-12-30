@@ -3,7 +3,7 @@ import { withSession } from "../../src/services/auth/session";
 export const getServerSideProps = withSession((context) => {
   return {
     props: {
-      session: context.req.session,
+      session: context.req?.session ?? null,
     },
   };
 });

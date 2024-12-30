@@ -17,12 +17,15 @@ const controllers = {
 
   async refreshAccessToken(req, res) {
     const context = { req, res };
-    const refresh_token = TokenService.getRefreshToken(context);
+    const refresh_token =
+      TokenService.getRefreshToken(context) || req.headers["refresh_token"];
 
     try {
-      const response = await HttpClient("refresh", {
+      const response = await HttpClient("/refresh", {
         method: "POST",
         body: { refresh_token },
+        useDefaultUrl: true,
+        refresh: false,
       });
 
       TokenService.save(response.data.access_token, context);
@@ -44,6 +47,7 @@ const controllers = {
 const controllerBy = {
   POST: controllers.storeRefreshToken,
   GET: controllers.refreshAccessToken,
+  PUT: controllers.refreshAccessToken,
 };
 
 export default function handler(req, res) {
