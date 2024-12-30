@@ -1,7 +1,7 @@
 const DEFAULT_URL = process.env.NEXT_PUBLIC_URL_BACKEND_DEFAULT;
 
-export const HttpClient = async (url, options) => {
-  return fetch(`${DEFAULT_URL}/${url}`, {
+export const HttpClient = async (url, options, useDefaultUrl = true) => {
+  return fetch(`${useDefaultUrl ? DEFAULT_URL : ""}/${url}`, {
     ...options,
     headers: {
       "Content-Type": "application/json",

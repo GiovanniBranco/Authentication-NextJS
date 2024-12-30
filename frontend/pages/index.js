@@ -1,7 +1,6 @@
-import { useState } from "react";
 import { useRouter } from "next/router";
+import { useState } from "react";
 import { AuthService } from "../src/services/auth/authService";
-import { TokenService } from "../src/services/auth/tokenService";
 
 export default function HomeScreen() {
   const [values, setValues] = useState({
@@ -13,18 +12,12 @@ export default function HomeScreen() {
     setValues({ ...values, [event.target.name]: event.target.value });
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
-    AuthService.login(values)
-      .then((response) => {
-        if (response.data.access_token) {
-          TokenService.save(response.data.access_token);
-        }
-        // router.push("/auth/auth-page-ssr");
-        router.push("/auth/auth-page-static");
-      })
-      .catch((error) => alert("Username or Password is incorrect"));
+    await AuthService.login(values);
+
+    router.push(`/auth/auth-page-ssr`);
   };
 
   const router = useRouter();
