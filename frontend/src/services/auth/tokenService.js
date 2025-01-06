@@ -30,4 +30,12 @@ export const TokenService = {
   remove(context = null) {
     nookies.destroy(context, ACCESS_TOKEN_KEY);
   },
+
+  removeRefreshToken(context = null) {
+    nookies.destroy(context, REFRESH_TOKEN_KEY, {
+      httpOnly: true,
+      sameSite: "lax",
+      path: "/",
+    });
+  },
 };

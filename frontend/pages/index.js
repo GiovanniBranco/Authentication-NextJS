@@ -17,8 +17,8 @@ export default function HomeScreen() {
 
     await AuthService.login(values);
 
-    router.push(`/auth/auth-page-ssr`);
-    // router.push(`/auth/auth-page-static`);
+    // router.push(`/auth/auth-page-ssr`);
+    router.push(`/auth/auth-page-static`);
   };
 
   const router = useRouter();
@@ -42,6 +42,14 @@ export default function HomeScreen() {
         <div>
           <button>Entrar</button>
         </div>
+
+        <p>
+          <a href="/auth/auth-page-ssr">Auth Page SSR</a>
+        </p>
+
+        <p>
+          <a href="/auth/auth-page-static">Auth Page Static</a>
+        </p>
       </form>
     </div>
   );

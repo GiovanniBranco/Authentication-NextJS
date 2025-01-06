@@ -42,12 +42,24 @@ const controllers = {
       res.status(401).json({ message: "Unauthorized" });
     }
   },
+
+  async logout(req, res) {
+    const context = { req, res };
+
+    TokenService.removeRefreshToken(context);
+
+    res.status(204).json({
+      data: {
+        message: "Deleted with success.",
+      },
+    });
+  },
 };
 
 const controllerBy = {
   POST: controllers.storeRefreshToken,
   GET: controllers.refreshAccessToken,
-  PUT: controllers.refreshAccessToken,
+  DELETE: controllers.logout,
 };
 
 export default function handler(req, res) {
